@@ -3,17 +3,22 @@
 Установщик разворачивает 3x-ui и создаёт один профиль VLESS + gRPC + REALITY. Он рассчитан на чистый VPS с Ubuntu 22.04 или 24.04 либо Debian 12 или 13, systemd и публичным IPv4. Поддерживаются x86_64 и aarch64.
 
 1. В кабинете хостинга найдите публичный IPv4 и данные для входа по SSH. В сетевом экране хостинга разрешите входящий TCP 443 и сохраните доступ по SSH. Порт панели 2053 оставьте закрытым извне.
-2. Скачайте [install-personal-vpn.sh](install-personal-vpn.sh). В терминале или PowerShell перейдите в папку загрузок и подставьте адрес VPS и свой логин SSH.
+2. Подключитесь к VPS из терминала или PowerShell. Замените `IP_СЕРВЕРА` публичным IPv4, а `root` — логином SSH из кабинета хостинга.
 
    ```bash
-   scp install-personal-vpn.sh root@IP_СЕРВЕРА:~/
    ssh root@IP_СЕРВЕРА
    ```
 
-3. Выполните команды на сервере.
+3. Выполните команды на VPS. Подставьте тот же IPv4. Скрипт будет скачан с GitHub и запущен после успешного скачивания.
 
    ```bash
+   curl -fL https://raw.githubusercontent.com/GubernatorovDev/AutoSep/773e9eebbbb366f5b3d325fd73a4248467817cff/install-personal-vpn.sh -o ~/install-personal-vpn.sh && \
    sudo bash ~/install-personal-vpn.sh IP_СЕРВЕРА
+   ```
+
+   Если `curl` не установлен, выполните `sudo apt update && sudo apt install -y curl ca-certificates` и повторите команду. Когда установка завершится, откройте файл доступа.
+
+   ```bash
    sudo cat /root/personal-vpn-access.txt
    ```
 
